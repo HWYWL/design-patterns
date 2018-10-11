@@ -1,5 +1,7 @@
 package com.yi.simple_factory;
 
+import com.yi.common.Product;
+
 /**
  * 接口实现
  * @author YI

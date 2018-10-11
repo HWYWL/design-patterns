@@ -1,5 +1,6 @@
 package com.yi.simple_factory;
 
+import com.yi.common.Product;
 import com.yi.common.Recommend;
 
 /**

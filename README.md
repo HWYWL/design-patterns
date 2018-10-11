@@ -242,6 +242,183 @@ secondName
 - [java.lang.System#getSecurityManager()](http://docs.oracle.com/javase/8/docs/api/java/lang/System.html#getSecurityManager--)
 
 
+## 2. 简单工厂（Simple Factory）
+
+### Intent
+
+在创建一个对象时不向客户暴露内部细节，并提供一个创建对象的通用接口。
+
+### Class Diagram
+
+简单工厂把实例化的操作单独放到一个类中，这个类就成为简单工厂类，让简单工厂类来决定应该用哪个具体子类来实例化。
+
+这样做能把客户类和具体子类的实现解耦，客户类不再需要知道有哪些子类以及应当实例化哪个子类。客户类往往有多个，如果不使用简单工厂，那么所有的客户类都要知道所有子类的细节。而且一旦子类发生改变，例如增加子类，那么所有的客户类都要进行修改。
+
+![](https://i.imgur.com/chP5OPu.jpg)
+
+### Implementation
+
+```java
+public interface Product {
+    void hello();
+}
+```
+
+```java
+public class ConcreteProduct implements Product {
+    @Override
+    public void hello() {
+        System.out.println("Hello Java");
+    }
+}
+```
+
+```java
+public class ConcreteProduct1 implements Product {
+    @Override
+    public void hello() {
+        System.out.println("Hello Python");
+    }
+}
+```
+
+```java
+public class ConcreteProduct2 implements Product {
+    @Override
+    public void hello() {
+        System.out.println("Hello Go");
+    }
+}
+```
+
+以下的 Client 类包含了实例化的代码，这是一种错误的实现。如果在客户类中存在这种实例化代码，就需要考虑将代码放到简单工厂中。
+
+```java
+public class Client1 {
+    public static void main(String[] args) {
+        int type = 1;
+        Product product;
+        if (type == 1) {
+            product = new ConcreteProduct1();
+        } else if (type == 2) {
+            product = new ConcreteProduct2();
+        } else {
+            product = new ConcreteProduct();
+        }
+
+        product.hello();
+    }
+}
+```
+
+以下的 SimpleFactory 是简单工厂实现，它被所有需要进行实例化的客户类调用。
+
+```java
+public class SimpleFactory {
+    public Product createProduct(int type) {
+        if (type == 1) {
+            return new ConcreteProduct1();
+        } else if (type == 2) {
+            return new ConcreteProduct2();
+        }
+
+        return new ConcreteProduct();
+    }
+}
+```
+
+```java
+public class Client2 {
+    public static void main(String[] args) {
+        SimpleFactory simpleFactory = new SimpleFactory();
+
+        Product product = simpleFactory.createProduct(1);
+        product.hello();
+    }
+}
+```
+
+## 3. 工厂方法（Factory Method）
+
+### Intent
+
+定义了一个创建对象的接口，但由子类决定要实例化哪个类。工厂方法把实例化操作推迟到子类。
+
+### Class Diagram
+
+在简单工厂中，创建对象的是另一个类，而在工厂方法中，是由子类来创建对象。
+
+下图中，Factory 有一个 doSomething() 方法，这个方法需要用到一个产品对象，这个产品对象由 factoryMethod() 方法创建。该方法是抽象的，需要由子类去实现。
+
+![](https://i.imgur.com/uvXIKrJ.jpg)
+
+### Implementation
+
+```java
+public abstract class Factory {
+    abstract public Product factoryMethod();
+    public void doSomething() {
+        Product product = factoryMethod();
+        // do something with the product
+    }
+}
+```
+
+```java
+/**
+ * 实现工厂抽象方法
+ * @author YI
+ * @date 2018-10-11 10:42:21
+ */
+public class ConcreteFactory extends Factory {
+    @Override
+    public Product factoryMethod() {
+        return () -> System.out.println("我是工厂生产的产品，大家可以叫我啦啦♪(^∇^*)");
+    }
+}
+```
+
+```java
+/**
+ * 实现工厂抽象方法
+ * @author YI
+ * @date 2018-10-11 10:42:21
+ */
+public class ConcreteFactory1 extends Factory {
+    @Override
+    public Product factoryMethod() {
+        return () -> System.out.println("我是工厂生产的产品，大家可以叫我嘻嘻(#^.^#)");
+    }
+}
+```
+
+```java
+/**
+ * 实现工厂抽象方法
+ * @author YI
+ * @date 2018-10-11 10:42:21
+ */
+public class ConcreteFactory2 extends Factory {
+    @Override
+    public Product factoryMethod() {
+        return () -> System.out.println("我是工厂生产的产品，大家可以叫我哈哈^_^");
+    }
+}
+
+```
+
+### JDK
+
+- [java.util.Calendar](http://docs.oracle.com/javase/8/docs/api/java/util/Calendar.html#getInstance--)
+- [java.util.ResourceBundle](http://docs.oracle.com/javase/8/docs/api/java/util/ResourceBundle.html#getBundle-java.lang.String-)
+- [java.text.NumberFormat](http://docs.oracle.com/javase/8/docs/api/java/text/NumberFormat.html#getInstance--)
+- [java.nio.charset.Charset](http://docs.oracle.com/javase/8/docs/api/java/nio/charset/Charset.html#forName-java.lang.String-)
+- [java.net.URLStreamHandlerFactory](http://docs.oracle.com/javase/8/docs/api/java/net/URLStreamHandlerFactory.html#createURLStreamHandler-java.lang.String-)
+- [java.util.EnumSet](https://docs.oracle.com/javase/8/docs/api/java/util/EnumSet.html#of-E-)
+- [javax.xml.bind.JAXBContext](https://docs.oracle.com/javase/8/docs/api/javax/xml/bind/JAXBContext.html#createMarshaller--)
+
+
+
 ### 感谢
 - [CyC2018](https://github.com/CyC2018/CS-Notes/blob/master/notes/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.md) 大佬的整理
 

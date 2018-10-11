@@ -1,6 +1,7 @@
 package com.yi.simple_factory;
 
 import com.yi.common.NotRecommend;
+import com.yi.common.Product;
 
 /**
  * 错误的实现，需要考虑将代码放到简单工厂中
