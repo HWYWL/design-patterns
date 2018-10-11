@@ -1,7 +1,46 @@
 # design-patterns
-Java 设计模式
+<!-- GFM-TOC -->
+* [一、概述](#一概述)
+* [二、创建型](#二创建型)
+    * [1. 单例（Singleton）](#1-单例singleton)
+    * [2. 简单工厂（Simple Factory）](#2-简单工厂simple-factory)
+    * [3. 工厂方法（Factory Method）](#3-工厂方法factory-method)
+    * [4. 抽象工厂（Abstract Factory）](#4-抽象工厂abstract-factory)
+    * [5. 生成器（Builder）](#5-生成器builder)
+    * [6. 原型模式（Prototype）](#6-原型模式prototype)
+* [三、行为型](#三行为型)
+    * [1. 责任链（Chain Of Responsibility）](#1-责任链chain-of-responsibility)
+    * [2. 命令（Command）](#2-命令command)
+    * [3. 解释器（Interpreter）](#3-解释器interpreter)
+    * [4. 迭代器（Iterator）](#4-迭代器iterator)
+    * [5. 中介者（Mediator）](#5-中介者mediator)
+    * [6. 备忘录（Memento）](#6-备忘录memento)
+    * [7. 观察者（Observer）](#7-观察者observer)
+    * [8. 状态（State）](#8-状态state)
+    * [9. 策略（Strategy）](#9-策略strategy)
+    * [10. 模板方法（Template Method）](#10-模板方法template-method)
+    * [11. 访问者（Visitor）](#11-访问者visitor)
+    * [12. 空对象（Null）](#12-空对象null)
+* [四、结构型](#四结构型)
+    * [1. 适配器（Adapter）](#1-适配器adapter)
+    * [2. 桥接（Bridge）](#2-桥接bridge)
+    * [3. 组合（Composite）](#3-组合composite)
+    * [4. 装饰（Decorator）](#4-装饰decorator)
+    * [5. 外观（Facade）](#5-外观facade)
+    * [6. 享元（Flyweight）](#6-享元flyweight)
+    * [7. 代理（Proxy）](#7-代理proxy)
+* [参考资料](#参考资料)
+<!-- GFM-TOC -->
 
-## 1. 单例（Singleton）
+
+# 一、概述
+
+设计模式是解决问题的方案，学习现有的设计模式可以做到经验复用。
+
+拥有设计模式词汇，在沟通时就能用更少的词汇来讨论，并且不需要了解底层细节。
+
+[源码](https://github.com/HWYWL/design-patterns)
+## 1.单例（Singleton）
 
 ### Intent
 
@@ -13,7 +52,7 @@ Java 设计模式
 
 私有构造函数保证了不能通过构造函数来创建对象实例，只能通过公有静态函数返回唯一的私有静态变量。
 
-<div align="center"> <img src="../pics//562f2844-d77c-40e0-887a-28a7128abd42.png"/> </div><br>
+![](https://i.imgur.com/zJiI9m5.jpg)
 
 ### Implementation
 
@@ -201,6 +240,7 @@ secondName
 - [java.lang.Runtime#getRuntime()](http://docs.oracle.com/javase/8/docs/api/java/lang/Runtime.html#getRuntime%28%29)
 - [java.awt.Desktop#getDesktop()](http://docs.oracle.com/javase/8/docs/api/java/awt/Desktop.html#getDesktop--)
 - [java.lang.System#getSecurityManager()](http://docs.oracle.com/javase/8/docs/api/java/lang/System.html#getSecurityManager--)
+
 
 ### 感谢
 - [CyC2018](https://github.com/CyC2018/CS-Notes/blob/master/notes/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.md) 大佬的整理
