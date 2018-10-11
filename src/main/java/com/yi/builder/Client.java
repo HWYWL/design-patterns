@@ -1,7 +1,7 @@
 package com.yi.builder;
 
 /**
- * StringBuilder
+ * 生成器设计模式
  * @author YI
  * @date 2018-10-11 11:29:24
  */

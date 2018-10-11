@@ -654,6 +654,63 @@ abcdefghijklmnopqrstuvwxyz
 - [java.lang.Appendable](http://docs.oracle.com/javase/8/docs/api/java/lang/Appendable.html)
 - [Apache Camel builders](https://github.com/apache/camel/tree/0e195428ee04531be27a0b659005e3aa8d159d23/camel-core/src/main/java/org/apache/camel/builder)
 
+## 6. 原型模式（Prototype）
+
+### Intent
+
+使用原型实例指定要创建对象的类型，通过复制这个原型来创建新对象。
+
+### Class Diagram
+
+![](https://i.imgur.com/6TBgFjp.jpg)
+
+### Implementation
+
+```java
+public abstract class Prototype {
+    abstract Prototype myClone();
+}
+```
+
+```java
+public class ConcretePrototype extends Prototype {
+
+    private String filed;
+
+    public ConcretePrototype(String filed) {
+        this.filed = filed;
+    }
+
+    @Override
+    Prototype myClone() {
+        return new ConcretePrototype(filed);
+    }
+
+    @Override
+    public String toString() {
+        return filed;
+    }
+}
+```
+
+```java
+public class Client {
+    public static void main(String[] args) {
+        Prototype prototype = new ConcretePrototype("abc");
+        Prototype clone = prototype.myClone();
+        System.out.println(clone.toString());
+    }
+}
+```
+
+```html
+abc
+```
+
+### JDK
+
+- [java.lang.Object#clone()](http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#clone%28%29)
+
 
 ### 感谢
 - [CyC2018](https://github.com/CyC2018/CS-Notes/blob/master/notes/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.md) 大佬的整理
